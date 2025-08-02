@@ -10,6 +10,7 @@ def main():
     """
     parser = argparse.ArgumentParser(description="A simple OCR pipeline.")
     parser.add_argument("image_path", help="The path to the image to process.")
+    parser.add_argument("--engine", default="tesseract", choices=["tesseract", "easyocr"], help="The OCR engine to use.")
     args = parser.parse_args()
 
     try:
@@ -21,8 +22,8 @@ def main():
         print("Preprocessing complete.")
 
         # Step 2: Extract text using OCR
-        print("\nStep 2: Extracting text...")
-        raw_text = extract_text(preprocessed_image)
+        print(f"\nStep 2: Extracting text with {args.engine}...")
+        raw_text = extract_text(preprocessed_image, engine=args.engine)
         print("Text extraction complete.")
         print("--- Raw Text ---")
         print(raw_text)

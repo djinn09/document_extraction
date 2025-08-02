@@ -1,4 +1,7 @@
 opencv-python
 pytesseract
 pyspellchecker
-numpy
+numpy<2.0
+easyocr
+torch
+torchvision

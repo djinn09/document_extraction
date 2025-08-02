@@ -21,9 +21,30 @@ graph TD
     F3 --> G[End Processed Document];
 ```
 
+## Usage
+
+To run the OCR pipeline, use the `main.py` script. You must provide the path to an image file.
+
+```bash
+python3 src/main.py /path/to/your/image.png
+```
+
+### Selecting an Engine
+
+You can choose between two different OCR engines using the `--engine` flag:
+
+- `tesseract` (Default): A solid, widely-used OCR engine.
+- `easyocr`: A deep-learning based engine that may provide higher accuracy.
+
+Example:
+```bash
+# Run with EasyOCR
+python3 src/main.py /path/to/your/image.png --engine easyocr
+```
+
 ## Project Structure
 
-The project will be organized as follows:
+The project is organized as follows:
 
 ```
 .
@@ -43,14 +64,16 @@ The project will be organized as follows:
 ## Modules
 
 ### Preprocessing (`src/preprocessing.py`)
-This module will contain functions for preparing the image for OCR.
+This module contains functions for preparing the image for OCR.
 - **Noise Reduction**: Removes unwanted artifacts from the image.
 - **Binarization**: Converts the image to black and white.
 - **Skew Correction**: Aligns the text in the image.
 - **Segmentation**: Divides the document into lines or words.
 
 ### OCR Engine (`src/ocr.py`)
-This module will use an OCR engine (like Tesseract) to extract text from the preprocessed image.
+This module provides a flexible interface to multiple OCR engines. The supported engines are:
+- **Tesseract**: A popular, open-source OCR engine.
+- **EasyOCR**: A deep-learning based OCR library known for its accuracy.
 
 ### Post-processing (`src/postprocessing.py`)
 This module will contain functions for cleaning up the extracted text.
@@ -60,15 +83,10 @@ This module will contain functions for cleaning up the extracted text.
 
 ## To-Do List
 
-- [x] **Step 1: Create `README.md`**
-- [ ] **Step 2: Set up the Python project**
-  - [ ] Create `src` and `tests` directories
-  - [ ] Create placeholder Python files
-  - [ ] Create `requirements.txt`
-- [ ] **Step 3: Implement the OCR pipeline**
-  - [ ] Implement preprocessing functions
-  - [ ] Implement OCR engine logic
-  - [ ] Implement post-processing functions
-- [ ] **Step 4: Create a main script**
-- [ ] **Step 5: Write tests**
-- [ ] **Step 6: Submit the final code**
+- [x] **Step 1: Refactor for Multi-Engine Support**
+- [x] **Step 2: Integrate Tesseract Engine**
+- [x] **Step 3: Integrate EasyOCR Engine**
+- [x] **Step 4: Update Main Script for Engine Selection**
+- [x] **Step 5: Update Documentation**
+- [ ] **Step 6: Update Tests for All Engines**
+- [ ] **Step 7: Submit Final Code**

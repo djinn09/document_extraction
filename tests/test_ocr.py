@@ -47,5 +47,23 @@ class TestOCR(unittest.TestCase):
         extracted_text = extract_text(empty_image_array)
         self.assertEqual(extracted_text.strip(), "")
 
+    def test_extract_text_easyocr(self):
+        """Test the text extraction with the EasyOCR engine."""
+        test_text = "Hello EasyOCR"
+        dummy_image_array = self.create_dummy_image(test_text)
+
+        # This will download the model on the first run in a test environment
+        extracted_text = extract_text(dummy_image_array, engine='easyocr')
+
+        # EasyOCR often returns text line by line, so we check if the text is in the joined output
+        self.assertIn(test_text, extracted_text.replace("\n", " "))
+
+    def test_invalid_engine_name(self):
+        """Test that an invalid engine name raises a ValueError."""
+        # Create a dummy image array
+        dummy_image = np.full((100, 500), 255, dtype=np.uint8)
+        with self.assertRaises(ValueError):
+            extract_text(dummy_image, engine='non_existent_engine')
+
 if __name__ == '__main__':
     unittest.main()
